@@ -5,30 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Обмен вещами</title>
     <script>
-        async function loadItems() {
-            const sheetURL = "https://docs.google.com/spreadsheets/d/1HZ9rOty9L3N9c2vgGIZCFpUzwhAI1SwJVrVvdaH5Bis/edit?usp=sharing";
-            const response = await fetch(sheetURL);
-            const data = await response.text();
-            const rows = data.split("\n").slice(1);
+async function loadItems() {
+    const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRkfOPIuFqXLWgzJhWu8OnLvIBpVOPH0CIt_jbDaZvIxKh_JpjL8mYTQphi3bbqHNXTrRu4vxy0k5Vw/pub?gid=451021242&single=true&output=csv";
 
-            let content = "";
-            rows.forEach(row => {
-                let columns = row.split(",");
-                content += `
-                    <div class="card">
-                        <img src="${columns[3]}" alt="${columns[1]}" />
-                        <h3>${columns[1]}</h3>
-                        <p>${columns[2]}</p>
-                        <small>Контакты: ${columns[4]}</small>
-                    </div>
-                `;
-            });
+    try {
+        const response = await fetch(sheetURL);
+        const csvText = await response.text();
 
-            document.getElementById("items").innerHTML = content;
+        console.log("Данные из Google Sheets:", csvText); // Печатаем ответ
+
+        const rows = csvText.split("\n").map(row => row.split(","));
+        console.log("Парсинг строк:", rows); // Проверяем разбор CSV
+
+        let content = "";
+        for (let i = 1; i < rows.length; i++) { // Пропускаем заголовки
+            let columns = rows[i];
+
+            if (columns.length < 5) continue; // Если колонок мало — пропускаем строку
+
+            content += `
+                <div class="card">
+                    <img src="${columns[3]}" alt="${columns[1]}" />
+                    <h3>${columns[1]}</h3>
+                    <p>${columns[2]}</p>
+                    <small>Контакты: ${columns[4]}</small>
+                </div>
+            `;
         }
 
-        window.onload = loadItems;
+        document.getElementById("items").innerHTML = content;
+    } catch (error) {
+        console.error("Ошибка загрузки данных:", error);
+        document.getElementById("items").innerHTML = "<p>Не удалось загрузить данные.</p>";
+    }
+}
+
+window.onload = loadItems;
+
     </script>
+    
     <style>
         body { font-family: Arial, sans-serif; text-align: center; }
         .container { width: 80%; margin: auto; }
