@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обмен вещами</title>
+    <script>
+        async function loadItems() {
+            const sheetURL = "https://docs.google.com/spreadsheets/d/e/YOUR_SHEET_ID/pub?output=csv";
+            const response = await fetch(sheetURL);
+            const data = await response.text();
+            const rows = data.split("\n").slice(1);
+
+            let content = "";
+            rows.forEach(row => {
+                let columns = row.split(",");
+                content += `
+                    <div class="card">
+                        <img src="${columns[3]}" alt="${columns[1]}" />
+                        <h3>${columns[1]}</h3>
+                        <p>${columns[2]}</p>
+                        <small>Контакты: ${columns[4]}</small>
+                    </div>
+                `;
+            });
+
+            document.getElementById("items").innerHTML = content;
+        }
+
+        window.onload = loadItems;
+    </script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .container { width: 80%; margin: auto; }
+        .card { border: 1px solid #ddd; padding: 10px; margin: 10px; width: 200px; display: inline-block; }
+        .card img { width: 100%; height: auto; }
+        .button { display: block; padding: 10px; margin: 20px auto; background: blue; color: white; text-decoration: none; width: 200px; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Обмен ненужными вещами</h1>
+        <a class="button" href="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform" target="_blank">Добавить вещь</a>
+        <a class="button" href="https://docs.google.com/forms/d/e/YOUR_DELETE_FORM_ID/viewform" target="_blank">Удалить вещь</a>
+        <div id="items"></div>
+    </div>
+</body>
+</html>
