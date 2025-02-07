@@ -6,7 +6,7 @@
     <title>Обмен вещами</title>
     <script>
         async function loadItems() {
-            const sheetURL = "https://docs.google.com/spreadsheets/d/e/YOUR_SHEET_ID/pub?output=csv";
+            const sheetURL = "https://docs.google.com/spreadsheets/d/17FD15CON3fFCBfnyT7Qf4BsfKUqdhFMBjOAq90XNreQ/edit?usp=sharing";
             const response = await fetch(sheetURL);
             const data = await response.text();
             const rows = data.split("\n").slice(1);
@@ -40,8 +40,8 @@
 <body>
     <div class="container">
         <h1>Обмен ненужными вещами</h1>
-        <a class="button" href="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform" target="_blank">Добавить вещь</a>
-        <a class="button" href="https://docs.google.com/forms/d/e/YOUR_DELETE_FORM_ID/viewform" target="_blank">Удалить вещь</a>
+        <a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSczBI92VI4E3Tn2e6TG9ja3SMDeMeZFHJ2tmui9gCIet8oOvg/viewform?usp=header" target="_blank">Добавить вещь</a>
+        <a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSefv9lyAneQBDn6w5UHIGzwUjwMo1FyHalIG6FrwX3h6Plhmw/viewform?usp=header" target="_blank">Удалить вещь</a>
         <div id="items"></div>
     </div>
 </body>
