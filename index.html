@@ -1,69 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Обмен вещами</title>
-    <script>
-async function loadItems() {
-    const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRkfOPIuFqXLWgzJhWu8OnLvIBpVOPH0CIt_jbDaZvIxKh_JpjL8mYTQphi3bbqHNXTrRu4vxy0k5Vw/pub?gid=451021242&single=true&output=csv";
-
-    try {
-        const response = await fetch(sheetURL);
-        const csvText = await response.text();
-
-        console.log("Данные из Google Sheets:", csvText); // Печатаем ответ
-
-        const rows = csvText.split("\n").map(row => row.split(","));
-        console.log("Парсинг строк:", rows); // Проверяем разбор CSV
-
-        let content = "";
-        for (let i = 1; i < rows.length; i++) { // Пропускаем заголовки
-            let columns = rows[i];
-
-            if (columns.length < 5) continue; // Если колонок мало — пропускаем строку
-
-            content += `
-                <div class="card">
-                    <img src="${columns[3]}" alt="${columns[1]}" />
-                    <h3>${columns[1]}</h3>
-                    <p>${columns[2]}</p>
-                    <small>Город: ${columns[4]}</small>
-                </div>
-            `;
-        }
-
-        document.getElementById("items").innerHTML = content;
-    } catch (error) {
-        console.error("Ошибка загрузки данных:", error);
-        document.getElementById("items").innerHTML = "<p>Не удалось загрузить данные.</p>";
-    }
-}
-
-window.onload = loadItems;
-
-    </script>
-    
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        .container { width: 80%; margin: auto; }
-        .card { border: 1px solid #ddd; padding: 10px; margin: 10px; width: 200px; display: inline-block; }
-        .card img { width: 100%; height: auto; }
-        .button { display: block; padding: 10px; margin: 20px auto; background: blue; color: white; text-decoration: none; width: 200px; text-align: center; }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Обмен ненужными вещами</h1>
-        <a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSczBI92VI4E3Tn2e6TG9ja3SMDeMeZFHJ2tmui9gCIet8oOvg/viewform" target="_blank">Добавить вещь</a>
-        <a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSefv9lyAneQBDn6w5UHIGzwUjwMo1FyHalIG6FrwX3h6Plhmw/viewform" target="_blank">Удалить вещь</a>
-        <div id="items"></div>
-    </div>
-</body>
-</html> -->
-
-
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -76,7 +10,7 @@ window.onload = loadItems;
 
     <script>
         async function loadItems() {
-            const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRkfOPIuFqXLWgzJhWu8OnLvIBpVOPH0CIt_jbDaZvIxKh_JpjL8mYTQphi3bbqHNXTrRu4vxy0k5Vw/pub?gid=451021242&single=true&output=csv";
+            const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTTEmX8cPySFn1cevaxV_ybYc2wY2W9vpf-iEe9zUZgg1Huz9-nidVU1v_Igrhq5s7KEDnmAR_FxDbn/pub?gid=2126531448&single=true&output=csv";
 
             try {
                 const response = await fetch(sheetURL);
@@ -147,7 +81,7 @@ window.onload = loadItems;
 <body>
     <div class="container">
         <h1>Обмен ненужными вещами</h1>
-        <a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSczBI92VI4E3Tn2e6TG9ja3SMDeMeZFHJ2tmui9gCIet8oOvg/viewform" target="_blank">Добавить вещь</a>
+        <a class="button" href="https://forms.gle/G51uYG26hQGw15Jc8" target="_blank">Добавить вещь</a>
         <a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSefv9lyAneQBDn6w5UHIGzwUjwMo1FyHalIG6FrwX3h6Plhmw/viewform" target="_blank">Удалить вещь</a>
         <div id="items"></div>
     </div>
